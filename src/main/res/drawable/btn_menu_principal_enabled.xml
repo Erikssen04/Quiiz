@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Borde más visible -->
+    <stroke android:color="#FED805" android:width="2dp"/>
+    <!-- Fondo más vibrante para el efecto de presionado -->
+    <solid android:color="#FFE85C"/> <!-- Amarillo más cálido -->
+    <!-- Esquinas redondeadas -->
+    <corners android:radius="16dp"/>
+    <!-- Sombra -->
+    <padding android:left="8dp" android:top="8dp" android:right="8dp" android:bottom="8dp"/>
+</shape>
+
