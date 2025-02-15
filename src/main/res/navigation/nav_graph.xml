@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/fragment_main_menu"> <!-- fragment_baul_trivias -->
+
+    <fragment
+        android:id="@+id/fragment_baul_trivias"
+        android:name="com.example.proyecto_quizz_ericmacia.fragments.BaulTriviasFragment"
+        android:label="Baúl de Trivias"
+        tools:layout="@layout/fragment_baul_trivias" />
+        <action
+            android:id="@+id/action_fragment_main_menu_to_fragment_baul_trivias"
+            app:destination="@id/fragment_main_menu" />
+    <fragment
+        android:id="@+id/fragment_main_menu"
+        android:name="com.example.proyecto_quizz_ericmacia.fragments.MainMenuFragment"
+        android:label="Main Menu"
+        tools:layout="@layout/fragment_main_menu">
+        <action
+            android:id="@+id/action_fragment_main_menu_to_fragment_baul_trivias"
+            app:destination="@id/fragment_baul_trivias" />
+    </fragment>
+</navigation>

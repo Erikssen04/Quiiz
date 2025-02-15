@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="yellow_quiz">#FED805</color>
+    <color name="yellow_button_text">#FFC107</color>
+    <color name="teal_light">#B2F7F1</color>
+    <color name="teal_dark">#80D8D6</color>
+    <color name="light_silver">#D6DFE6</color>
+    <color name="drawer_background">#66B2FF</color> <!-- Azul claro -->
+
+    <color name="drawer_text">#FFCC00</color> <!-- Amarillo -->
+    <color name="drawer_text_secondary">#FFFFFF</color> <!-- Blanco para el texto secundario -->
+
+
+</resources>

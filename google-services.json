@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "479273933488",
+    "project_id": "quiiz-ff180",
+    "storage_bucket": "quiiz-ff180.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:479273933488:android:039bf1e25352ed62c43975",
+        "android_client_info": {
+          "package_name": "com.example.proyecto_quizz_ericmacia"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-A7yEmCwlqSQFrGt00icfDENbJMOtvWU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
