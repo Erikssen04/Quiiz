@@ -64,5 +64,5 @@ dependencies {
     implementation("com.google.firebase:firebase-firestore-ktx:24.4.3")
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-auth")
-
+    annotationProcessor(libs.compiler)
 }

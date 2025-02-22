@@ -2,6 +2,7 @@ package com.example.proyecto_quizz_ericmacia.features.ui
 
 import android.content.Context
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -23,6 +24,7 @@ class MainMenuActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainMenuBinding
     lateinit var fragmentMainMenu: MainMenuFragment
     lateinit var navController: NavController
+    private lateinit var mediaPlayer: MediaPlayer
     private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,6 +34,12 @@ class MainMenuActivity : AppCompatActivity() {
         // Inicializar el binding
         binding = ActivityMainMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        mediaPlayer = MediaPlayer.create(this, R.raw.sonido)
+        mediaPlayer.setOnPreparedListener {
+            it.isLooping = true
+            it.start()
+        }
 
         val toolbar = binding.appBarLayoutDrawer.toolbar
         setSupportActionBar(toolbar)
@@ -51,7 +59,8 @@ class MainMenuActivity : AppCompatActivity() {
 
         // Configuración para gestionar la navegación entre fragmentos
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.fragment_main_menu, R.id.fragment_baul_trivias),
+            setOf(R.id.fragment_main_menu, R.id.fragment_baul_trivias,
+                R.id.fragment_profile, R.id.fragment_multimedia),
             binding.mainMenu
         )
         // Configurar ActionBar para manejar la navegación
@@ -87,6 +96,15 @@ class MainMenuActivity : AppCompatActivity() {
         return true
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        if (mediaPlayer.isPlaying) {
+            mediaPlayer.stop()
+        }
+        mediaPlayer.release()
+    }
+
+
     //Navegación del menú de opciones.
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
@@ -96,6 +114,14 @@ class MainMenuActivity : AppCompatActivity() {
             }
             R.id.fragment_baul_trivias -> {
                 navController.navigate(R.id.fragment_baul_trivias) // Navegar al fragmento del baúl de trivias
+                true
+            }
+            R.id.fragment_profile -> {
+                navController.navigate(R.id.fragment_profile) // Mirar datos del usuario
+                true
+            }
+            R.id.fragment_multimedia -> {
+                navController.navigate(R.id.fragment_multimedia) // Mostrar contenido multimedia
                 true
             }
             R.id.logout -> { // Cerrar sesión

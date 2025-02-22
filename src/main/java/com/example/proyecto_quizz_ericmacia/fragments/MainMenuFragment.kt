@@ -3,13 +3,17 @@ package com.example.proyecto_quizz_ericmacia.fragments
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import android.widget.VideoView
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.example.proyecto_quizz_ericmacia.R
 import com.example.proyecto_quizz_ericmacia.databinding.ActivityLoginBinding
 import com.example.proyecto_quizz_ericmacia.databinding.FragmentMainMenuBinding
@@ -25,13 +29,37 @@ class MainMenuFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         bindingFragment = FragmentMainMenuBinding.inflate(inflater, container, false)
+
         return bindingFragment.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val videoView = view.findViewById<VideoView>(R.id.videoView)
+        videoView?.let {
+            val videoPath = "android.resource://" + requireContext().packageName + "/" + R.raw.video
+            it.setVideoURI(Uri.parse(videoPath))
+
+            it.setOnPreparedListener { mediaPlayer ->
+
+                //Silenciar el volumen del vídeo para que solo se escuche el de sonido.mp3
+                mediaPlayer.setVolume(0f, 0f)
+            }
+
+            it.start()
+        } ?: run {
+            Log.e("MainMenuFragment", "Error: videoView es null")
+        }
+
+        val imageView = bindingFragment.quiizMainActLogo
+
+        // He optado por el mismo logo del drawable en lugar de una URL
+        val imageUrl = R.drawable.quiiz_logo_v1
+
+        Glide.with(this).load(imageUrl).into(imageView)
+
         setupListeners()
-        // Establecer los listeners para los botones
     }
 
     private fun setupListeners() {
@@ -43,22 +71,13 @@ class MainMenuFragment : Fragment() {
 
         bindingFragment.btnBaulTrivias.setOnClickListener {
             // Navegar al fragmento del baúl de trivias
-            findNavController().navigate(R.id.action_fragment_main_menu_to_fragment_baul_trivias)
+            findNavController().navigate(R.id.action_mainMenu_to_baulTrivias)
         }
 
         bindingFragment.btnBaulJuegos.setOnClickListener {
             // Mensaje de que esta opción estará habilitada próximamente
             Toast.makeText(requireContext(), "Esta opción será habilitada proximamente",
                 Toast.LENGTH_SHORT).show()
-        }
-
-        bindingFragment.btnSalir.setOnClickListener {
-            borrar_sesion()
-
-            val intent = Intent(requireContext(), LoginActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
-            requireActivity().finish() // Cierra la actividad
         }
 
         val correo = requireActivity().intent.getStringExtra("CORREO")
@@ -68,6 +87,8 @@ class MainMenuFragment : Fragment() {
         } else {
             ""
         }
+
+
     }
 
     @SuppressLint("CommitPrefEdits")
